@@ -1,4 +1,5 @@
 import logo from "../../assets/CannaLogo.png";
+import downArrow from "../../assets/down.png";
 import "../Navbar/navbar.css";
 import insta from "../../assets/instagram.png";
 import fb from "../../assets/facebook.png";
@@ -7,10 +8,15 @@ import gsap from "gsap";
 export function Navbar() {
   const [hoverIndex, setHoverIndex] = useState(null);
   const links = [
-    { linkName: "About Us", link: "" },
-    { linkName: "Services", link: "" },
-    { linkName: "Projects", link: "" },
+    { linkName: "Shop Online", linkPng: downArrow, link: "" },
+    { linkName: "Delivery", link: "" },
+    { linkName: "About", link: "" },
+    { linkName: "Deals", link: "" },
+    { linkName: "FAQs", link: "" },
+    { linkName: "Wellness Blogs", link: "" },
+    { linkName: "Locations", linkPng: downArrow, link: "" },
     { linkName: "Contact Us", link: "" },
+    { linkName: "Loyalty Program", link: "" },
   ];
 
   const handleMouseEnter = (index) => {
@@ -35,9 +41,10 @@ export function Navbar() {
     <div className="navbar-main-container">
       <div className="navbar-info-container">
         <div className="navbar-slogan-container">
-          <p className="font1 f1-5">
-            " Your Digital Spark, Your Business Brilliance."
-          </p>
+          <button className="navbar-shop-delivery-button font2 f1-5">
+            {" "}
+            Shop Delivery{" "}
+          </button>
         </div>
         <img src={logo} className="navbar-main-logo" />
         <div className="navbar-socials-container">
@@ -54,9 +61,14 @@ export function Navbar() {
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
             >
-              <a href="#" className="navbar-link font2">
-                {link.linkName}
-              </a>
+              <div className="navbar-link-png-container">
+                <a href="#" className="navbar-link font2">
+                  {link.linkName}
+                </a>
+                {link.linkPng && (
+                  <img src={link.linkPng} className="navbar-dropdown-png" />
+                )}
+              </div>
               <div className="underline-container">
                 {hoverIndex === index && <div className="underline"></div>}
               </div>
