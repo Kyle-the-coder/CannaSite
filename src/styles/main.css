@@ -48,3 +48,11 @@ body {
 .f2 {
   font-size: 2rem;
 }
+
+.greenText {
+  color: rgb(63, 172, 63);
+}
+
+.orangeText {
+  color: rgb(232, 162, 10);
+}

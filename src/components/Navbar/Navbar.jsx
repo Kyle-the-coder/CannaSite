@@ -47,9 +47,18 @@ export function Navbar() {
           </button>
         </div>
         <img src={logo} className="navbar-main-logo" />
-        <div className="navbar-socials-container">
-          <div className="navbar-phone-container"></div>
-          <div className="navbar-phone-container"></div>
+        <div className="navbar-contacts-container">
+          <div className="navbar-phone-container">
+            <p className="font1 orangeText ">Alternatives on East</p>
+            <p className="font2 greenText">000-000-0000</p>
+          </div>
+          <div className="navbar-phone-container">
+            <p className="font1 orangeText">Alternatives on West</p>
+            <p className="font2 greenText">000-000-0000</p>
+          </div>
+          <div className="navbar-phone-container">
+            <p className="font1 greenText">alt@alt.com</p>
+          </div>
         </div>
       </div>
       <div className="navbar-links-container">
