@@ -48,8 +48,8 @@ export function Navbar() {
         </div>
         <img src={logo} className="navbar-main-logo" />
         <div className="navbar-socials-container">
-          <img src={insta} className="navbar-social-png" />
-          <img src={fb} className="navbar-social-png" />
+          <div className="navbar-phone-container"></div>
+          <div className="navbar-phone-container"></div>
         </div>
       </div>
       <div className="navbar-links-container">
