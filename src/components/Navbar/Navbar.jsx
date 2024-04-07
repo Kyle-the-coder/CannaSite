@@ -79,8 +79,6 @@ export function Navbar() {
       </div>
       <div className="navbar-links-container">
         {links.map((link, index) => {
-          console.log(index === dropdownIndex);
-
           return (
             <div
               className="navbar-link-cont"
