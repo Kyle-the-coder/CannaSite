@@ -52,6 +52,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  position: relative;
 }
 
 .navbar-link-cont {
@@ -124,4 +125,16 @@
 }
 .navbar-phone-container > p {
   margin: 0;
+}
+
+.navbar-dropdown-menu {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 100%;
+  left: 2%;
+  background-color: whitesmoke;
 }

@@ -1,22 +1,33 @@
 import logo from "../../assets/CannaLogo.png";
 import downArrow from "../../assets/down.png";
 import "../Navbar/navbar.css";
-import insta from "../../assets/instagram.png";
-import fb from "../../assets/facebook.png";
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 export function Navbar() {
   const [hoverIndex, setHoverIndex] = useState(null);
+  const [isDropdownActive, setIsDropdownActive] = useState(false);
+  const [dropdownIndex, setDropdownIndex] = useState(null);
   const links = [
-    { linkName: "Shop Online", linkPng: downArrow, link: "" },
-    { linkName: "Delivery", link: "" },
-    { linkName: "About", link: "" },
-    { linkName: "Deals", link: "" },
-    { linkName: "FAQs", link: "" },
-    { linkName: "Wellness Blogs", link: "" },
-    { linkName: "Locations", linkPng: downArrow, link: "" },
-    { linkName: "Contact Us", link: "" },
-    { linkName: "Loyalty Program", link: "" },
+    {
+      linkName: "Shop Online",
+      linkPng: downArrow,
+      link: "",
+      isDropdown: true,
+    },
+    { linkName: "Delivery", link: "", isDropdown: false },
+    { linkName: "About", link: "", isDropdown: false },
+    { linkName: "Deals", link: "", isDropdown: false },
+    { linkName: "FAQs", link: "", isDropdown: false },
+    { linkName: "Wellness Blogs", link: "", isDropdown: false },
+    {
+      linkName: "Locations",
+      linkPng: downArrow,
+      link: "",
+      isDropdown: true,
+      isDropdownActive: false,
+    },
+    { linkName: "Contact Us", link: "", isDropdown: false },
+    { linkName: "Loyalty Program", link: "", isDropdown: false },
   ];
 
   const handleMouseEnter = (index) => {
@@ -33,6 +44,11 @@ export function Navbar() {
         scaleX: 0,
         transformOrigin: "50% 50%",
         ease: "power4.out",
+      });
+    }
+    if (isDropdownActive === true) {
+      gsap.from("navbar-dropdown-menu", 1, {
+        scaleY: 0,
       });
     }
   }, [hoverIndex]);
@@ -63,6 +79,8 @@ export function Navbar() {
       </div>
       <div className="navbar-links-container">
         {links.map((link, index) => {
+          console.log(index === dropdownIndex);
+
           return (
             <div
               className="navbar-link-cont"
@@ -71,7 +89,14 @@ export function Navbar() {
               onMouseLeave={handleMouseLeave}
             >
               <div className="navbar-link-png-container">
-                <a href="#" className="navbar-link font2">
+                <a
+                  href="#"
+                  className="navbar-link font2"
+                  onClick={() => {
+                    setDropdownIndex(index);
+                    setIsDropdownActive(true);
+                  }}
+                >
                   {link.linkName}
                 </a>
                 {link.linkPng && (
@@ -81,10 +106,34 @@ export function Navbar() {
               <div className="underline-container">
                 {hoverIndex === index && <div className="underline"></div>}
               </div>
+              {isDropdownActive && dropdownIndex === index ? (
+                <div className="navbar-dropdown-menu">
+                  {link.linkName === "Locations" && (
+                    <DropdownMenu options={["Where", "Where"]} />
+                  )}
+                  {link.linkName === "Shop Online" && (
+                    <DropdownMenu options={["Shop", "Here"]} />
+                  )}
+                </div>
+              ) : null}
             </div>
           );
         })}
       </div>
+    </div>
+  );
+}
+
+function DropdownMenu({ options }) {
+  return (
+    <div>
+      {options.map((option, index) => {
+        return (
+          <div key={index}>
+            <h1>{option}</h1>
+          </div>
+        );
+      })}
     </div>
   );
 }
