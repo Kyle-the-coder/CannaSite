@@ -5,8 +5,21 @@ import { useEffect, useState } from "react";
 import gsap from "gsap";
 export function Navbar() {
   const [hoverIndex, setHoverIndex] = useState(null);
-  const [isDropdownActive, setIsDropdownActive] = useState(false);
+  const [dropdownOption, setDropdownOption] = useState("");
+  const dropdownRef = useRef(null);
+  const [isShopOnlineDropdownActive, setIsShopOnlineDropdownActive] =
+    useState(false);
+  const [isLocationsDropdownActive, setIsLocationsDropdownActive] =
+    useState(false);
   const [dropdownIndex, setDropdownIndex] = useState(null);
+  const [shopOnlineDropdownPosition, setShopOnlineDropdownPosition] = useState({
+    top: 0,
+    left: 0,
+  });
+  const [locationsDropdownPosition, setLocationsDropdownPosition] = useState({
+    top: 0,
+    left: 0,
+  });
   const links = [
     {
       linkName: "Shop Online",
@@ -52,6 +65,39 @@ export function Navbar() {
       });
     }
   }, [hoverIndex]);
+
+  const handleDropdownClick = (link, index) => {
+    setDropdownOption(link);
+    //SHOP ONLINE
+    if (link === "Shop Online") {
+      setIsShopOnlineDropdownActive(true);
+      setIsLocationsDropdownActive(false);
+      const dropdownTop = 146;
+      const dropdownLeft = index * 18;
+      setShopOnlineDropdownPosition({ top: dropdownTop, left: dropdownLeft });
+      //LOCATIONS
+    } else if (link === "Locations") {
+      setIsLocationsDropdownActive(true);
+      setIsShopOnlineDropdownActive(false);
+      const dropdownTop = 146;
+      const dropdownLeft = index * 19;
+      setLocationsDropdownPosition({ top: dropdownTop, left: dropdownLeft });
+    }
+  };
+
+  function DropdownMenu({ options }) {
+    return (
+      <div>
+        {options.map((option, index) => {
+          return (
+            <div key={index}>
+              <h1>{option}</h1>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div className="navbar-main-container">
@@ -118,20 +164,6 @@ export function Navbar() {
           );
         })}
       </div>
-    </div>
-  );
-}
-
-function DropdownMenu({ options }) {
-  return (
-    <div>
-      {options.map((option, index) => {
-        return (
-          <div key={index}>
-            <h1>{option}</h1>
-          </div>
-        );
-      })}
     </div>
   );
 }
